@@ -4,22 +4,28 @@ import { UserAvatar } from "@/features/auth/components/user-button";
 import Link from "next/link";
 import Image from "next/image";
 import { Separator } from "@/components/ui/separator"
+import { SearchModal } from "./search-modal";
+import { useSearchModal } from "./use-search-modal";
 export const Navbar = () => {
+  const [, setOpen] = useSearchModal();
   return (
+    <>
+    <SearchModal/>
     <nav className=" flex flex-col max-w-screen-xl mx-auto p-1.5">
       <div className=" flex items-center  p-1.5 h-12 ">
         <div className="flex-1 flex ">
-          <Link href="/">
-            <Image src="/logo.svg" alt="logo" width={40} height={40} />
+          <Link href="/" className="w-10 h-10 relative">
+            <Image src="/logo.svg" alt="logo" fill  />
           </Link>
         </div>
-        <div className="min-w-[280px] max-[624px] grow-[2] shrink">
+        <div className="max-w-[624px] flex-1 md:grow-[2] shrink">
           <Button
             size="sm"
             className="bg-accent/25 hover:bg-accent-25 w-full justify-start h-7 px-2"
+            onClick={() => setOpen(true)}
           >
             <Search className="size-4 text-white mr-2" />
-            <span className="text-white text-xs">Search </span>
+            <span className="text-white text-xs">Tìm kiếm phim </span>
           </Button>
         </div>
         <div className="ml-auto flex-1 flex items-center justify-end">
@@ -52,5 +58,6 @@ export const Navbar = () => {
         </div>
       </div>
     </nav>
+    </>
   );
 };
