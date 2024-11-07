@@ -101,20 +101,110 @@ const handleSeatClick = (seat: seatValue) => {
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="overflow-y-auto h-[80vh] p-6 max-w-5xl ">
         <DialogHeader className="">
-          <DialogTitle>Mua vé xem phim</DialogTitle>
+          <DialogTitle>Chọn ghế xem phim</DialogTitle>
         </DialogHeader>
 
         <>
-          <div className=" flex justify-center  shadow-lg w-[500px] h-full  overflow-auto md:min-h-[400px] md:w-full bg-gradient-to-b   from-[#0F172A] to-[#131d36]">
+          <div className="hidden md:flex justify-center  shadow-lg w-[500px] h-full  overflow-auto md:min-h-[400px] md:w-full bg-gradient-to-b   from-[#0F172A] to-[#131d36]">
             <TransformWrapper
               centerOnInit
-              initialScale={0.8} // Thiết lập mức zoom mặc định là 0.5 (50% so với kích thước thật)
-              minScale={0.6} // Thiết lập mức zoom nhỏ nhất là 0.2 (20% so với kích thước thật)
+              initialScale={0.8}
+              minScale={0.6}
             >
               <TransformComponent>
                 <div className=" flex flex-col  max-w-full  min-w-max h-full">
                   <div className=" w-full flex justify-center relative my-3">
                     <div className="p-2 min-w-[250px] max-w-full h-32 ">
+                      <Image
+                        src={"/img-screen.png"}
+                        alt="screen"
+                        fill
+                        className="object-contain "
+                      />
+                    </div>
+                    <div className="absolute inset-0 flex justify-center items-center pt-2 text-white text-2xl font-bold tracking-widest">
+                      Screen
+                    </div>
+                  </div>
+                  {/* Hàng ghế 1 */}
+                  {showtime &&
+                    showtime[0].seats.map((seat, index) => (
+                      <div key={index} className=" flex ">
+                        <div className="w-14 h-14 p-4 flex justify-center items-center">
+                          <Button
+                            variant="transparent"
+                            className="size-9  text-white text-sm font-semibold hover:bg-transparent"
+                          >
+                            {seat.rowNumber}
+                          </Button>
+                        </div>
+                        {seat.seats.map((seat) => {
+                          return (
+                            <div
+                              key={seat.number}
+                              className={cn(
+                                "h-14 w-14 p-4  flex justify-center items-center ",
+                                seat.type === "couple" && "w-28 ",
+                                seat.type === "standard" && "",
+                                seat.centerType === "first-left-row" &&
+                                  "border-l-2 border-red-500 rounded-tl-sm border-t-2",
+                                seat.centerType === "first-right-row" &&
+                                  "border-r-2 border-red-500 rounded-tr-sm border-t-2 ",
+                                seat.centerType === "first-row" &&
+                                  "border-t-2 border-red-500 ",
+                                seat.centerType === "middle-left-row" &&
+                                  "border-l-2 border-red-500",
+                                seat.centerType === "middle-right-row" &&
+                                  "border-r-2 border-red-500",
+                                seat.centerType === "last-left-row" &&
+                                  "border-l-2 rounded-bl-sm border-b-2 border-red-500",
+                                seat.centerType === "last-row" &&
+                                  "border-b-2 border-red-500 ",
+                                seat.centerType === "last-right-row" &&
+                                  "border-r-2 border-b-2 rounded-br-sm border-red-500",
+                             
+                              )}
+                            >
+                              <Button
+                                className={cn(
+                                  "size-9  text-purple-600 text-sm font-semibold bg-white hover:bg-white/85",
+                                  seat.type === "empty" &&
+                                    "!bg-transparent !text-transparent !cursor-default",
+                                  seat.type === "couple" &&
+                                    "w-full h-9 text-white bg-pink-500 hover:bg-pink-500/75",
+                                  seat.type === "standard" &&
+                                    "text-white bg-purple-500 hover:bg-purple-500/75",
+                                  seat.type === "vip" &&
+                                    "text-white bg-red-500 hover:bg-red-500/75",
+                                  seat.isBooked === true && "bg-gray-600 hover:bg-gray-600 cursor-default",
+                                  seat.status === "pending" && "bg-blue-500 hover:bg-blue-500/75 cursor-default",
+                                  selectedSeats.some(
+                                    (s) => s.number === seat.number
+                                  ) && "bg-yellow-500 hover:bg-yellow-500"
+                                )}
+                                onClick={() => handleSeatClick(seat)}
+                              >
+                                {seat.number}
+                              </Button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ))}
+                </div>
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
+          <div className="flex md:hidden justify-center  shadow-lg w-full h-72  overflow-auto bg-gradient-to-b   from-[#0F172A] to-[#131d36]">
+            <TransformWrapper
+              centerOnInit
+              initialScale={0.8}
+              minScale={0.6}
+            >
+              <TransformComponent>
+                <div className=" flex flex-col  max-w-full  min-w-max h-full">
+                  <div className=" w-full flex justify-center relative my-3">
+                    <div className="p-2 max-w-[200px]  h-32 ">
                       <Image
                         src={"/img-screen.png"}
                         alt="screen"
