@@ -63,38 +63,38 @@ const MovieSlider = ({ movies, isLoading }: MovieSliderProps) => {
 
   if (isLoading) {
     return (
-      <div className="slider-container max-w-7xl mx-auto multiple-items-slider py-3">
+      <div className="slider-container max-w-7xl mx-auto  p-2">
         <Slider {...settings}>
           <div>
-            <Skeleton className="h-[325px]  w-[290px]  rounded-xl" />
+            <Skeleton className="h-[325px] w-full md:w-[310px] " />
             <div className="space-y-2 mt-2">
-              <Skeleton className="h-4 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
+              <Skeleton className="h-4 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
             </div>
           </div>
           <div>
-            <Skeleton className="h-[325px]  w-[290px]  rounded-xl" />
+            <Skeleton className="h-[325px]  w-full md:w-[310px] " />
             <div className="space-y-2 mt-2">
-              <Skeleton className="h-4 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
+              <Skeleton className="h-4 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
             </div>
           </div>
           <div>
-            <Skeleton className="h-[325px]  w-[290px]  rounded-xl" />
+            <Skeleton className="h-[325px]  w-full md:w-[310px] " />
             <div className="space-y-2 mt-2">
-              <Skeleton className="h-4 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
+              <Skeleton className="h-4 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
             </div>
           </div>
           <div>
-            <Skeleton className="h-[325px]  w-[290px]  rounded-xl" />
+            <Skeleton className="h-[325px]  w-full md:w-[310px] " />
             <div className="space-y-2 mt-2">
-              <Skeleton className="h-4 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
-              <Skeleton className="h-5 w-[290px]" />
+              <Skeleton className="h-4 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
+              <Skeleton className="h-5 w-full md:w-[310px]" />
             </div>
           </div>
         </Slider>
@@ -103,12 +103,12 @@ const MovieSlider = ({ movies, isLoading }: MovieSliderProps) => {
   }
 
   return (
-    <div className="slider-container max-w-7xl mx-auto multiple-items-slider">
+    <div className="slider-container max-w-7xl mx-auto multiple-items-slider p-2">
       <Slider {...settings}>
         {movies?.map((movie) => (
           <Link href={`/movie/${movie._id}`} key={movie._id}>
-            <Card className="h-[560px] overflow-hidden group cursor-pointer">
-              <CardContent className="flex relative   h-[370px]  p-6 ">
+            <Card className="h-[450px] md:h-[560px] overflow-hidden group cursor-pointer">
+              <CardContent className="flex relative h-[270px] w-full md:h-[370px]  p-6 ">
                 <Image
                   src={movie.posterUrl || ""}
                   alt=""
@@ -118,14 +118,14 @@ const MovieSlider = ({ movies, isLoading }: MovieSliderProps) => {
                 <div className="absolute inset-0  bg-gray-900/70 z-10 opacity-0 group-hover:opacity-100  transition-transform duration-500 transform ">
                   <div className="flex flex-col items-center mt-5">
                     <h1 className="text-white mt-5 truncate">{movie.title}</h1>
-                    <div>
+                    <div className="p-2">
                       <Button
                         variant="transparent"
                         size="icon"
-                        className="gap-x-2  w-full hover:bg-transparent flex justify-start flex-wrap"
+                        className="gap-x-2  w-full hover:bg-transparent flex justify-start flex-wrap "
                       >
                         <Tag className="size-5 text-yellow-500" />
-                       {movie.genre.map((g, i) => <span key={i} className="text-xs truncate">{g}</span>)}
+                        <span className="text-xs truncate max-w-36">{movie.genre.join(", ")}</span>
                       </Button>
                       <Button
                         variant="transparent"

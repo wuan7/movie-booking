@@ -107,7 +107,7 @@ export const CreateBookingModal = ({selectedSeats, totalPrice}: CreateBookingPro
       toast.success("Đang xử lý, xin vui lòng chờ!");
       mutate({email, name, phone, showtimeId, selectedSeats, totalPrice, paymentMethod, movieId}, {
         onSuccess: async (data) => {
-          toast.success("booking created successfully");
+          toast.success("Đang điều hướng qua trang thanh toán, xin vui lòng chờ");
           console.log(data?.bookingId)
           const bookingId = data?.bookingId
          

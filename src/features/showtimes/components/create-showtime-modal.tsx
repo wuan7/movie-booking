@@ -70,8 +70,6 @@ const handleBuyTicket = () => {
     return;
   }
   setBookingOpen(true);
-  toast.success(`Bạn đã mua vé thành công với tổng tiền ${totalPrice} VND`);
-
   
 };
 
@@ -195,7 +193,7 @@ const handleSeatClick = (seat: seatValue) => {
               </TransformComponent>
             </TransformWrapper>
           </div>
-          <div className="flex md:hidden justify-center  shadow-lg w-full h-72  overflow-auto bg-gradient-to-b   from-[#0F172A] to-[#131d36]">
+          <div className="flex md:hidden justify-center  shadow-lg w-full h-72  overflow-auto custom-scrollbar bg-gradient-to-b   from-[#0F172A] to-[#131d36]">
             <TransformWrapper
               centerOnInit
               initialScale={0.8}

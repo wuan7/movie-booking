@@ -13,6 +13,20 @@ const BlogPage = () => {
   const handleClick = (blogId: Id<"blogs">) => {
     mutate({ blogId });
   };
+  if(status === "LoadingFirstPage") {
+    return (
+      <div className="flex justify-center mt-4 items-center min-h-96">
+        <Loader className=" size-4 animate-spin"/>
+      </div>
+    )
+  }
+  if(!results || results.length === 0) {
+    return (
+      <div className="flex justify-center mt-4 items-center min-h-96">
+        <p className="text-slate-600 text-2xl font-bold">Không tìm thấy blog</p>
+      </div>
+    )
+  }
   return (
     <div className="max-w-6xl mx-auto p-2">
       <h1 className="font-bold text-2xl">Blog Phim</h1>
@@ -46,9 +60,9 @@ const BlogPage = () => {
             </Link>
           ))}
       </div>
-      {isLoading && (
+      {status === "LoadingMore" && (
       <div className="flex justify-center mt-4">
-        <Loader className="text-white size-4 animate-spin"/>
+        <Loader className=" size-4 animate-spin"/>
       </div>
     )}
     {status === "CanLoadMore" && (
