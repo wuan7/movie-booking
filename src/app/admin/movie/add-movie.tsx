@@ -19,6 +19,7 @@ import { Id } from "../../../../convex/_generated/dataModel";
 import { XIcon } from "lucide-react";
 import { Hint } from "@/components/hint";
 import { useGenerateUploadUrl } from "@/features/upload/api/use-generate-upload-url";
+import { Label } from "@/components/ui/label";
 
 type CreateMovieValues = {
   title: string;
@@ -45,12 +46,29 @@ const genreList = [
   "Viễn tưởng",
   "Hoạt hình",
   "Thể thao",
-  "Phiêu lưu",
   "Khoa học viễn tưởng",
   "Âm nhạc",
   "Tài liệu",
   "Gia đình",
   "Chính kịch",
+  "Kịch tính",
+  "Hình sự",
+  "Bí ẩn",
+  "Phép thuật",
+  "Thần thoại",
+  "Lịch sử",
+  "Chiến tranh",
+  "Thảm họa",
+  "Viễn Tây",
+  "Phiêu lưu kỳ ảo",
+  "Thám hiểm",
+  "Trinh thám",
+  "Tội phạm",
+  "Học đường",
+  "Cổ trang",
+  "Thực tế",
+  "Siêu anh hùng",
+  "Giả tưởng",
   "Khác",
 ];
 
@@ -168,7 +186,10 @@ export const AddMovie = () => {
   return (
     <div>
       <form onSubmit={handleSubmit} className="space-y-4">
+        <Label htmlFor="title">Tên phim </Label>
+
         <Input
+          id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           disabled={isPending}
@@ -177,14 +198,19 @@ export const AddMovie = () => {
           minLength={3}
           placeholder="Movie name"
         />
+        <Label htmlFor="description">Mô tả phim </Label>
+
         <Textarea
+          id="description"
           onChange={(e) => setDescription(e.target.value)}
           value={description}
           placeholder="Description..."
           disabled={isPending}
         />
+        <Label htmlFor="director">Tên đạo diễn </Label>
 
         <Input
+          id="director"
           value={director}
           onChange={(e) => setDirector(e.target.value)}
           disabled={isPending}
@@ -193,7 +219,10 @@ export const AddMovie = () => {
           minLength={3}
           placeholder="Dierector name"
         />
+
+        <Label htmlFor="duration">Thời gian chiếu</Label>
         <Input
+          id="duration"
           value={duration}
           onChange={(e) => setDuration(Number(e.target.value))}
           disabled={isPending}
@@ -202,6 +231,8 @@ export const AddMovie = () => {
           minLength={2}
           placeholder="Thời gian"
         />
+        <Label>Ảnh</Label>
+
         <Input
           type="file"
           accept="image/*"
@@ -232,12 +263,18 @@ export const AddMovie = () => {
             </div>
           </div>
         )}
+        <Label>Ngày phát hành</Label>
+        <br />
         <DatePicker
           date={releaseDate}
           setDate={setReleaseDate}
           disabled={isPending}
         />
+          <br />
+        <Label htmlFor="nation">Quốc gia</Label>
+
         <Input
+          id="nation"
           value={nation}
           onChange={(e) => setNation(e.target.value)}
           disabled={isPending}
@@ -246,8 +283,9 @@ export const AddMovie = () => {
           minLength={2}
           placeholder="Quốc gia"
         />
-
+        <Label htmlFor="trailerUrl">Trialer phim</Label>
         <Input
+          id="trailerUrl"
           value={trailerUrl}
           onChange={(e) => setTrailerUrl(e.target.value)}
           disabled={isPending}
@@ -256,6 +294,8 @@ export const AddMovie = () => {
           minLength={3}
           placeholder="Trailer url"
         />
+
+        <Label>Độ tuổi phù hợp</Label>
         <Select
           defaultValue={age}
           onValueChange={(value: "18" | "16" | "13" | "K" | "P") =>
@@ -275,6 +315,7 @@ export const AddMovie = () => {
         </Select>
 
         <div className="">
+          <Label>Thêm diễn viên</Label>
           <div className="flex max-w-[300px]">
             <Input
               value={cast}
@@ -293,7 +334,7 @@ export const AddMovie = () => {
             ))}
           </div>
         </div>
-
+        <Label htmlFor="status">{status}</Label>
         <Select
           defaultValue={status}
           onValueChange={(value: "upcoming" | "showing" | "not_showing") =>

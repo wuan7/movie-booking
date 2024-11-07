@@ -77,6 +77,18 @@ const items = [
     subItems: [{ title: "Add category", url: "/admin/category" }],
   },
   {
+    title: "Company",
+    url: "#",
+    icon: Search,
+    subItems: [{ title: "Add company", url: "/admin/company" }],
+  },
+  {
+    title: "Branch",
+    url: "#",
+    icon: Search,
+    subItems: [{ title: "Add branch", url: "/admin/branch" }],
+  },
+  {
     title: "Settings",
     url: "#",
     icon: Settings,

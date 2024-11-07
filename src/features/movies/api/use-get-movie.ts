@@ -3,7 +3,7 @@ import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
 
 interface UseGetMovieProps {
-    id: Id<"movies">;
+    id?: Id<"movies">;
 }
 export type GetMovieReturnType = typeof api.movies.getById._returnType;
 export const useGetMovie = ({id} : UseGetMovieProps) => {

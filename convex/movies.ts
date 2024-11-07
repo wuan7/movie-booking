@@ -47,7 +47,7 @@ export const create = mutation({
 
 export const getById = query({
   args: {
-    id: v.id("movies"),
+    id: v.optional(v.id("movies")),
   },
   handler: async (ctx, args) => {
     try {
@@ -128,5 +128,88 @@ export const getByStatus = query({
     );
 
     return moviesWithPosterUrls;
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("movies"),
+    title: v.optional(v.string()),
+    description: v.optional(v.string()),
+    director: v.optional(v.string()),
+    duration: v.optional(v.number()),
+    releaseDate: v.optional(v.string()),
+    nation: v.optional(v.string()),
+    posterUrl: v.optional(v.id("_storage")),
+    trailerUrl: v.optional(v.string()),
+    genre: v.optional(v.array(v.string())),
+    cast: v.optional(v.array(v.string())),
+    status: v.optional(
+      v.union(
+        v.literal("upcoming"),
+        v.literal("showing"),
+        v.literal("not_showing")
+      )
+    ),
+    age: v.optional(
+      v.union(
+        v.literal("18"),
+        v.literal("16"),
+        v.literal("13"),
+        v.literal("K"),
+        v.literal("P")
+      )
+    ),
+  },
+  handler: async (ctx, args) => {
+    const movieId = args.id;
+    const movie = await ctx.db.get(movieId);
+
+    if (!movie) {
+      throw new Error("Movie not found");
+    }
+    if (movie) {
+      const updatedMovie = {
+        ...movie,
+      };
+      if (args.title) {
+        updatedMovie.title = args.title;
+      }
+      if (args.description) {
+        updatedMovie.description = args.description;
+      }
+      if (args.director) {
+        updatedMovie.director = args.director;
+      }
+      if (args.duration) {
+        updatedMovie.duration = args.duration;
+      }
+      if (args.releaseDate) {
+        updatedMovie.releaseDate = args.releaseDate;
+      }
+      if (args.nation) {
+        updatedMovie.nation = args.nation;
+      }
+      if (args.posterUrl) {
+        updatedMovie.posterUrl = args.posterUrl;
+      }
+      if (args.trailerUrl) {
+        updatedMovie.trailerUrl = args.trailerUrl;
+      }
+      if (args.genre) {
+        updatedMovie.genre = args.genre;
+      }
+      if (args.cast) {
+        updatedMovie.cast = args.cast;
+      }
+      if (args.status) {
+        updatedMovie.status = args.status;
+      }
+      if (args.age) {
+        updatedMovie.age = args.age;
+      }
+      await ctx.db.patch(args.id, updatedMovie);
+      return args.id;
+    }
   },
 });
