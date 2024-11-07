@@ -28,7 +28,11 @@ export const Navbar = () => {
             <span className="text-white text-xs">Tìm kiếm phim </span>
           </Button>
         </div>
+        
         <div className="ml-auto flex-1 flex items-center justify-end">
+        <Link href="/blog" className="text-white mr-2 font-semibold flex md:hidden text-sm">
+        Blog
+          </Link>
           <UserAvatar />
         </div>
       </div>
